@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block title %}Report an issue | CivicSignal{% endblock %}
+{% block content %}
+<div class="page-intro"><span class="eyebrow">CITIZEN PORTAL / NEW REPORT</span><h1>What needs fixing?</h1><p>Tell us what happened and where. It takes less than a minute.</p></div>
+<div class="form-layout"><form class="panel form-panel" method="post">
+ <label>Your name <span class="optional">Optional</span><input name="citizen_name" placeholder="Anonymous"></label>
+ <label>Short title <span class="optional">Optional</span><input name="title" maxlength="65" placeholder="e.g. Large pothole near bus stop"></label>
+ <label>Describe the issue <span class="required">*</span><textarea name="description" required minlength="10" rows="5" placeholder="Explain what happened, how severe it is, and who may be affected..."></textarea></label>
+ <div class="form-row"><label>Category<select name="category"><option>Auto detect</option>{% for c in categories %}<option>{{ c }}</option>{% endfor %}</select></label><label>Location / address <span class="required">*</span><input name="location" required placeholder="Street, area, landmark"></label></div>
+ <div class="form-row"><label>Latitude <span class="optional">Optional</span><input name="latitude" id="latitude" type="number" step="any" placeholder="12.9716"></label><label>Longitude <span class="optional">Optional</span><input name="longitude" id="longitude" type="number" step="any" placeholder="77.5946"></label></div>
+ <button class="btn btn-primary full-btn" type="submit">Submit complaint →</button><p class="privacy-note">Demo prototype: please do not enter personal or sensitive information.</p>
+</form><aside class="side-info"><div class="info-icon">✦</div><h3>AI will help route your report</h3><p>After submission, CivicSignal will suggest a category, concise summary, priority score and possible duplicate match.</p><div class="info-divider"></div><b>What happens next?</b><ol><li>Your report receives a tracking ID.</li><li>An administrator reviews and assigns it.</li><li>You can check status anytime.</li></ol></aside></div>
+{% endblock %}

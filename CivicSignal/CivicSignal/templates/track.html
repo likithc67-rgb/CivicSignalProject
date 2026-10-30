@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}{{ item.tracking_code }} | CivicSignal{% endblock %}
+{% block content %}
+<div class="page-intro"><span class="eyebrow">CITIZEN PORTAL / TRACKING</span><h1>Your report status</h1><p>Tracking ID: <b>{{ item.tracking_code }}</b></p></div>
+<div class="detail-grid"><section class="panel detail-main"><div class="detail-top"><span class="priority {{ item.priority|lower }}">{{ item.priority }} priority · {{ item.priority_score }}/100</span><span class="status">{{ item.status }}</span></div><h2>{{ item.title }}</h2><p>{{ item.description }}</p><div class="detail-meta"><span>⌖ {{ item.location }}</span><span>▦ {{ item.category }}</span><span>◷ {{ item.created_at[:16].replace('T',' ') }}</span></div>
+<div class="ai-box"><span class="eyebrow">CIVICSIGNAL AI ASSESSMENT</span><h3>Report summary</h3><p>{{ item.ai_summary }}</p><h3>Why this priority?</h3><p>{{ item.priority_reason }}</p>{% if duplicate %}<p class="warning-text">Possible duplicate of {{ duplicate.tracking_code }}. Human review is recommended.</p>{% endif %}</div>
+{% if item.department %}<p><b>Assigned department:</b> {{ item.department }}{% if item.assigned_to %} · {{ item.assigned_to }}{% endif %}</p>{% endif %}
+{% if item.status == 'Resolved' and item.resolution_note %}<div class="success-box"><b>Resolution update</b><p>{{ item.resolution_note }}</p></div>{% endif %}
+</section><aside class="panel timeline"><h3>Activity timeline</h3>{% for h in history %}<div class="timeline-item"><span class="timeline-dot"></span><b>{{ h.status }}</b><small>{{ h.changed_at[:16].replace('T',' ') }}</small>{% if h.note %}<p>{{ h.note }}</p>{% endif %}</div>{% endfor %}</aside></div>
+{% endblock %}

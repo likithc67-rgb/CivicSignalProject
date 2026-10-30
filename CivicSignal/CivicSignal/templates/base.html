@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}CivicSignal{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script defer src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="{{ url_for('index') }}"><span class="brand-mark">C</span><span>Civic<span class="brand-accent">Signal</span><small>FROM COMPLAINTS TO ACTION</small></span></a>
+  <nav><a href="{{ url_for('index') }}">Home</a><a href="{{ url_for('report') }}">Report an issue</a><a href="{{ url_for('track_search') }}">Track complaint</a><a class="nav-admin" href="{{ url_for('admin') }}">Admin dashboard ↗</a></nav>
+</header>
+<main class="container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}{% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<footer>© 2026 CivicSignal · Prototype for PromptWars × ASTRA · Synthetic/demo data only</footer>
+</body></html>
